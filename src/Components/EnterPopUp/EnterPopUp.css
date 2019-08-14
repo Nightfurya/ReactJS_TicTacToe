@@ -1,0 +1,25 @@
+.popup-wrapper {
+  width: 100vw;
+  height: calc(100vh - 100px);
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  padding: 100px 0 0;
+  background: #444444;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.title {
+  font-size: 60px;
+}
+.accept-btn {
+  margin: 15px 0;
+  border: none;
+  background: transparent;
+  font-size: 50px;
+  color: yellow;
+  cursor: pointer;
+}
