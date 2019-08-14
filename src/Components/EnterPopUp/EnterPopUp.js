@@ -15,7 +15,7 @@ class EnterPopUp extends Component {
   render() {
     return (
       <div className="popup-wrapper" style={{ display: this.state.hidden ? "none" : "flex" }}>
-        <div className="title">Do you wanna play?</div>
+        <div className="title">Do you wanna play with me?</div>
         <button className="accept-btn" onClick={this.hidePopup}>
           YES!
         </button>
