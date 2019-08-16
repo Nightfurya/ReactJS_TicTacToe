@@ -13,9 +13,10 @@ header {
   align-items: center;
 }
 .title {
-  font-size: 26px;
+  font-size: 34px;
   color: #ffffff;
   text-align: center;
+  font-weight: bold;
 }
 .subtitle {
   font-size: 18px;

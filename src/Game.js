@@ -6,7 +6,7 @@ import Board from "./Components/Board/Board";
 
 class Game extends Component {
   state = {
-    history: [{ squares: Array(9).fill(null) }],
+    history: [{ squares: Array(9).fill(null), time: undefined }],
     isXNext: true,
     stepNumber: 0
   };
@@ -15,6 +15,7 @@ class Game extends Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const filledSquares = current.squares.slice();
+    let currentTurnTime = new Date().toLocaleTimeString();
 
     if (this.calculateWinner(filledSquares) || filledSquares[i]) {
       return;
@@ -23,7 +24,8 @@ class Game extends Component {
     this.setState({
       history: history.concat([
         {
-          squares: filledSquares
+          squares: filledSquares,
+          time: currentTurnTime
         }
       ]),
       isXNext: !this.state.isXNext,
@@ -56,7 +58,8 @@ class Game extends Component {
     const winner = this.calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
-      const desc = move ? "Go to move № " + move : "Go to game start";
+      const time = this.state.history[move].time;
+      const desc = move ? "Go to move № " + move + " --->   " + time : "Go to game start";
       return (
         <li key={move}>
           <button className="move-to-btn" onClick={() => this.jumpTo(move)}>
@@ -68,9 +71,9 @@ class Game extends Component {
 
     let status;
     if (winner) {
-      status = "Победитель: " + winner;
+      status = winner;
     } else {
-      status = "Следующий игрок: " + (this.state.isXNext ? "X" : "O");
+      status = this.state.isXNext ? "X" : "O";
     }
 
     return (
@@ -79,10 +82,15 @@ class Game extends Component {
         <Header />
         <div className="game">
           <div className="game-board">
-            <Board squares={current.squares} onClick={i => this.handleClick(i)} />
+            <Board squares={current.squares} onClick={i => this.handleClick(i)} isNext={this.state.isNext} />
           </div>
           <div className="game-info">
-            <div className="game-info-winner">{status}</div>
+            <div className="game-info-winner">
+              <p className="game-status">
+                {winner ? "Победитель: " : "Следующий игрок: "}
+                <span style={{ color: winner === "X" ? "green" : winner === "O" ? "red" : "black" }}>{status}</span>
+              </p>
+            </div>
             <ol>{moves}</ol>
           </div>
         </div>
