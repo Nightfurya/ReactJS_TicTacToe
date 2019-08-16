@@ -6,3 +6,12 @@
   align-items: center;
   height: calc(100vh - 100px);
 }
+.game-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px 20px;
+}
+.game-info-winner {
+  font-size: 22px;
+}
